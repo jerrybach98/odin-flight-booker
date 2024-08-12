@@ -1,24 +1,3 @@
-# README
+# One-Way Flight Booker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This project is practice with advanced form handling in Rails by creating a flight booking system. It focuses on complex form elements like dropdown menus, radio buttons, and nested submissions—essential skills. This project enhances Rails skills by applying them to a real-world scenario, helping with advanced form handling in Rails applications building on top of MVC backhand knowledge. 
