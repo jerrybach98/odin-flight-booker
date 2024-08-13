@@ -8,8 +8,8 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Airport.find_or_create_by(code: "SFO")
-Airport.find_or_create_by(code: "NYC")
-Airport.find_or_create_by(code: "LAX")
-Airport.find_or_create_by(code: "DEN")
-Airport.find_or_create_by(code: "DFW")
+Airport.create(code: "SFO")
+Airport.create(code: "NYC")
+Airport.create(code: "LAX")
+Airport.create(code: "DEN")
+Airport.create(code: "DFW")
