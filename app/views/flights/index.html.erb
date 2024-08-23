@@ -1,11 +1,26 @@
 <h2>Flight Search Form</h2>
 
 <%= form_with url: "/flights", method: :get do |form| %>
-  <%= form.label :airport_code %>
-  <%= form.select :airport_code, Airport.order(:code).map { |airport| [airport.code, airport.id] } %>
-  
-  <%= select_tag(:airport_code, options_for_select(@airport)) %><br><br>
+  <%= form.label :departure_id %>
+  <%= select_tag(:departure_id, options_for_select(@airport, selected: params[:departure_id])) %><br><br>
 
+  <%= form.label :arrival_id %>
+  <%= select_tag(:arrival_id, options_for_select(@airport, selected: params[:arrival_id])) %><br><br>
+
+  <%= form.label :start_datetime %>
+  <%= select_tag(:start_datetime, options_for_select(@start_datetime, selected: params[:start_datetime])) %><br><br>
 
   <%= form.submit "Search Flights" %>
 <% end %>
+
+<h2>Available Flights:</h2>
+<% if @search != nil %> 
+  <% @search.each do |flight| %>
+    <p><%= "Depart: " + flight.departure_airport.code %></p>
+    <p><%= "Arrive: " + flight.arrival_airport.code %></p>
+    <p><%= flight.start_datetime %></p>
+  <% end %>
+<% else %>
+  <p>No matching flights</p>
+<% end %>
+
