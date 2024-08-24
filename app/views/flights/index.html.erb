@@ -7,6 +7,9 @@
   <%= form.label :arrival_id %>
   <%= select_tag(:arrival_id, options_for_select(@airport, selected: params[:arrival_id])) %><br><br>
 
+  <%= form.label :passengers %>
+  <%= select_tag(:passengers, options_for_select([1, 2, 3, 4], selected: params[:passengers])) %><br><br>
+
   <%= form.label :start_datetime %>
   <%= select_tag(:start_datetime, options_for_select(@start_datetime, selected: params[:start_datetime])) %><br><br>
 
@@ -15,12 +18,20 @@
 
 <h2>Available Flights:</h2>
 <% if @search != nil %> 
-  <% @search.each do |flight| %>
-    <p><%= "Depart: " + flight.departure_airport.code %></p>
-    <p><%= "Arrive: " + flight.arrival_airport.code %></p>
-    <p><%= flight.start_datetime %></p>
+  <%= form_with url: "bookings/new/", method: :get do |form| %>
+
+  <%= f.hidden_field :passengers, :value => params[:passengers] %>
+
+    <% @search.each do |flight| %>
+      <p><%= "Depart: " + flight.departure_airport.code %></p>
+      <p><%= "Arrive: " + flight.arrival_airport.code %></p>
+      <p><%= flight.start_datetime %></p>
+    <% end %>
+
+    <%= form.submit "Search Flights" %>
+
+  <% else %>
+    <p class="flash-alert"><%= flash[:alert] %></p>
   <% end %>
-<% else %>
-  <p>No matching flights</p>
 <% end %>
 
