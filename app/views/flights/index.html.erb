@@ -26,9 +26,12 @@
       <p><%= "Depart: " + flight.departure_airport.code %></p>
       <p><%= "Arrive: " + flight.arrival_airport.code %></p>
       <p><%= flight.start_datetime %></p>
+
+      <%= form.radio_button :flight_id, flight.id %>
+      <%= form.label :flight_id, "Flight from #{flight.departure_airport.code} to #{flight.arrival_airport.code} on #{flight.start_datetime}" %>
     <% end %>
 
-    <%= form.submit "Search Flights" %>
+    <%= form.submit "Book Flight" %>
 
   <% else %>
     <p class="flash-alert"><%= flash[:alert] %></p>
