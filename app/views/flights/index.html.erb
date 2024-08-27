@@ -20,7 +20,7 @@
 <% if @search != nil %> 
   <%= form_with url: "bookings/new/", method: :get do |form| %>
 
-  <%= f.hidden_field :passengers, :value => params[:passengers] %>
+  <%= form.hidden_field :passengers, :value => params[:passengers] %>
 
     <% @search.each do |flight| %>
       <p><%= "Depart: " + flight.departure_airport.code %></p>
@@ -28,13 +28,11 @@
       <p><%= flight.start_datetime %></p>
 
       <%= form.radio_button :flight_id, flight.id %>
-      <%= form.label :flight_id, "Flight from #{flight.departure_airport.code} to #{flight.arrival_airport.code} on #{flight.start_datetime}" %>
+      <%= form.label :flight_id, "Flight from #{flight.departure_airport.code} to #{flight.arrival_airport.code} on #{flight.start_datetime}" %> <br><br>
     <% end %>
-
     <%= form.submit "Book Flight" %>
-
+  <% end %>
   <% else %>
     <p class="flash-alert"><%= flash[:alert] %></p>
-  <% end %>
 <% end %>
 
