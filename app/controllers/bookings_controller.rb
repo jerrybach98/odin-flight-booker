@@ -1,14 +1,17 @@
 class BookingsController < ApplicationController
 
   def new
-    @booking = Booking.new
-  end
+    @flight = Flight.find(params[:flight_id])
+    @booking = Booking.new(flight: @flight) #params for passengers?
+
+    params[:passengers].to_i.times { @booking.passengers.build }
+  end 
 
 
   def create
-    @booking = current_user.bookings.build(flights_params)
+    @booking = bookings.build(bookings_params) #params for passengers?
 
-      if @event.save
+      if @bookings.save
           flash[:success] = "Your flight has been selected!"
           redirect_to booking_path(@booking.id)
       else
@@ -18,7 +21,7 @@ class BookingsController < ApplicationController
 
 
   private
-  def flights_params
-    params.permit(:passengers,:flight_id,:start_datetime)
+  def bookings_params
+    params.permit(:passengers,:flight_id) #add nested params , :passenger_attributes => [:id, :name, :email]
   end
 end

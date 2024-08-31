@@ -1,0 +1,24 @@
+<h2>Book Flight</h2>
+
+<p><%= "Depart: " + @flight.departure_airport.code %></p>
+<p><%= "Arrive: " + @flight.arrival_airport.code %></p>
+<p><%= @flight.start_datetime %></p>
+<p><%= "Flight from #{@flight.departure_airport.code} to #{@flight.arrival_airport.code} on #{@flight.start_datetime}" %></p>
+
+<%# reread sub forms and create form that creates booking with flight.id / passenger.id 
+- subforms that fill out name, email, and flight id %>
+
+<h2>Passenger Information</h2>
+<%= form_with model: @booking do |form| %>
+  <%= form.hidden_field :flight_id, :value => params[:flight_id] %>
+
+  <%= form.fields_for :passengers do |passenger| %>
+    <%= passenger.label :name, "Name:" %>
+    <%= passenger.text_field :name, required: true %>
+
+    <%= passenger.label :email, "Email:" %>
+    <%= passenger.email_field :email, required: true %> <br><br>
+  <% end %>
+
+  <%= form.submit "Submit" %>
+<% end %>
