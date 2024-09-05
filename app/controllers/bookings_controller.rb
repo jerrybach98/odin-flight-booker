@@ -2,17 +2,24 @@ class BookingsController < ApplicationController
 
   def new
     @flight = Flight.find(params[:flight_id])
-    @booking = Booking.new(flight: @flight) #params for passengers?
+    @booking = Booking.new
 
     params[:passengers].to_i.times { @booking.passengers.build }
   end 
 
 
   def create
-    @booking = bookings.build(bookings_params) #params for passengers?
 
-      if @bookings.save
-          flash[:success] = "Your flight has been selected!"
+    puts "Booking Parameters: #{params[:booking].inspect}"
+
+    @flight = Flight.find(params[:booking][:flight_id])
+    puts "Flight found: #{@flight.inspect}" # Debugging the flight object
+
+    @booking = Booking.build(bookings_params)
+    puts "Booking after initialization: #{@booking.inspect}"
+
+      if @booking.save
+          flash[:success] = "Your flight has been booked!"
           redirect_to booking_path(@booking.id)
       else
           render :new, status: :unprocessable_entity
@@ -22,6 +29,6 @@ class BookingsController < ApplicationController
 
   private
   def bookings_params
-    params.permit(:passengers,:flight_id) #add nested params , :passenger_attributes => [:id, :name, :email]
+    params.require(:booking).permit(:flight_id, passengers_attributes: [:id, :name, :email])
   end
 end
