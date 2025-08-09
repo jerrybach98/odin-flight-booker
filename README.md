@@ -16,7 +16,7 @@ You must have Ruby installed. See [here](https://www.ruby-lang.org/en/downloads/
 ## Thoughts:
 The most challenging part of this project was figuring out how to create nested associated objects for form population, properly passing nested form parameters, and understanding how their associations work together.
 
-## Further ehancements:
+## Further enhancements:
 * Frontend Development: Create a polished and responsive user interface for the booking system.
 * API Integration: Populate available flights dynamically using external APIs for real-time flight data.
 * Booking Confirmation: Add email notifications to confirm bookings for passengers.
